@@ -194,6 +194,7 @@ def _tbenv(env_data=None):
     return os.environ.get('ENV_NAME')
 
 
+@task
 def upload_keys(ctx, keys, name):
     s3bucket = 'elasticbeanstalk-encoded-4dn-system'
     if _PROD():
