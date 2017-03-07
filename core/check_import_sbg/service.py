@@ -2,6 +2,9 @@
 from core import sbg_utils
 import boto3
 import json
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 s3 = boto3.resource('s3')
 # TODO: I don't want to call the following in test,
@@ -29,6 +32,7 @@ def handler(event, context):
         # TODO: Let this be a funciton of SBGWorkflowRun
         # Soo: We already had this function in  SBGWorkflowRun. What happened to it?
         res = _api._get("/storage/imports/" + import_id, data).json()
+        logger.info(res)
         if res.get('state') != 'COMPLETED':
             raise Exception("file still uploading")
         else:
