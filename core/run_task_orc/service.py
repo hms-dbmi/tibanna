@@ -11,7 +11,7 @@ def handler(event, context):
     this is to run the actual task
     '''
     # get data
-    sbg = utils.create_sbg_workflow(**event.get('workflow'))
+    sbg = sbg_utils.create_sbg_workflow(**event.get('workflow'))
 
     # create task on SBG
     create_resp = sbg.create_task(sbg.task_input)
