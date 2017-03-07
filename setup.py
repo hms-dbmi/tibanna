@@ -13,7 +13,7 @@ requires = [
     'botocore==1.4.52',
     'awscli==1.10.62',
     'pycrypto==2.6.1',
-    'paramiko==2.1.2'
+    'paramiko==1.18.2'
 ]
 
 tests_require = [

@@ -4,7 +4,7 @@ awscli
 python-lambda
 submit4dn
 pycrypto
-paramiko
+paramiko==1.18.2
 
 # for testing
 pytest==3.0.5
