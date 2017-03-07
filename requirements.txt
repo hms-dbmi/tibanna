@@ -3,6 +3,7 @@ botocore
 awscli
 python-lambda
 submit4dn
+pycrypto
 paramiko
 
 # for testing
@@ -14,4 +15,3 @@ invoke
 
 # Syntax checking
 flake8==2.4.1
-
