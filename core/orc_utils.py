@@ -23,11 +23,10 @@ def test_fxn():
     Test function. Runs part of an alignment on orchestra
     """
     client, username, password = orc_init_and_connect()
-    stdin, stdout, stderr = client.exec_command('source hackathon_venv/bin/activate')
     # command:
-    ret_id = orc_run_job(client, '"bash ./hackathon_align.sh"', 'short',
+    ret_id = orc_run_job(client, '"bash /home/cv82/hackathon_align.sh"', 'short',
                          '2:00',
-                         extras='-R "rusage[mem=5000] rusage[tmp=10000]" -o hackathon_align.lsf')
+                         extras='-n 2 -R "rusage[mem=5000] rusage[tmp=10000]" -o hackathon_align.lsf')
     print('ALIGNING')
     print('ID:', ret_id)
     sleep_amt = 5
@@ -37,9 +36,8 @@ def test_fxn():
         sleep_amt = sleep_amt*2
         job_status = orc_job_status(client, ret_id)
         print('ID:', ret_id, 'STATUS:', job_status)
-    # aws s3 cp ./hackathon_bam/hackathon_sample_data-sort.bam s3://carlv
-    ret_id = orc_run_job((client, 'aws s3 cp ./hackathon_bam/hackathon_sample_data-sort.bam s3://carlv',
-                          'short', '2:00'))
+
+    ret_id = orc_run_job(client, '"bash /home/cv82/cp_to_s3.sh"', 'short', '2:00', extras='-o hackathon_s3_copy.lsf')
     print('COPYING RESULTS TO S3')
     print('ID:', ret_id)
     sleep_amt = 5
