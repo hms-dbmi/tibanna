@@ -17,6 +17,7 @@ build_sh: some function to generate .sh from list to run? Could have defaults:
     like <#!/bin/bash>
 """
 
+
 def test_fxn():
     """
     Test function. Runs part of an alignment on orchestra
@@ -25,7 +26,8 @@ def test_fxn():
     stdin, stdout, stderr = client.exec_command('source hackathon_venv/bin/activate')
     # command:
     ret_id = orc_run_job(client, '"bash ./hackathon_align.sh"', 'short',
-         '2:00', extras='-R "rusage[mem=5000] rusage[tmp=10000]" -o hackathon_align.lsf')
+                         '2:00',
+                         extras='-R "rusage[mem=5000] rusage[tmp=10000]" -o hackathon_align.lsf')
     print('ALIGNING')
     print('ID:', ret_id)
     sleep_amt = 5
@@ -36,7 +38,8 @@ def test_fxn():
         job_status = orc_job_status(client, ret_id)
         print('ID:', ret_id, 'STATUS:', job_status)
     # aws s3 cp ./hackathon_bam/hackathon_sample_data-sort.bam s3://carlv
-    ret_id = orc_run_job((client, 'aws s3 cp ./hackathon_bam/hackathon_sample_data-sort.bam s3://carlv', 'short','2:00')
+    ret_id = orc_run_job((client, 'aws s3 cp ./hackathon_bam/hackathon_sample_data-sort.bam s3://carlv',
+                          'short', '2:00'))
     print('COPYING RESULTS TO S3')
     print('ID:', ret_id)
     sleep_amt = 5
@@ -46,6 +49,7 @@ def test_fxn():
         sleep_amt = sleep_amt*2
         job_status = orc_job_status(client, ret_id)
         print('ID:', ret_id, 'STATUS:', job_status)
+
 
 def orc_init_and_connect():
     """
@@ -114,7 +118,6 @@ def extract_job_id(stdout):
     if s_idx == -1 or e_idx == -1:
         raise ValueError
     return l[0][s_idx+1:e_idx]
-
 
 
 if __name__ == "__main__":
